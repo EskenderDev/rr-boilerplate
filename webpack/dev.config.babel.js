@@ -1,10 +1,18 @@
 import { CONFIG, APP_PATH } from './config';
+import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
 import merge from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 
 export default merge({
   devtool: 'source-map',
+
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:9999',
+    'webpack/hot/only-dev-server',
+    `${ APP_PATH }/main`,
+  ],
 
   module: {
     rules: [{
@@ -36,6 +44,9 @@ export default merge({
       context: APP_PATH,
       files: '**/*.css'
     }),
+
+    new HotModuleReplacementPlugin(),
+    new NamedModulesPlugin(),
   ],
 
   performance: {
@@ -46,10 +57,11 @@ export default merge({
     historyApiFallback: true,
     contentBase: APP_PATH,
     openPage: '',
-    inline: true,
+    inline: false,
     noInfo: false,
     open: true,
     port: 9999,
+    hot: true,
 
     stats: {
       errorDetails: true,

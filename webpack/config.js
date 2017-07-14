@@ -6,7 +6,7 @@ export const APP_PATH  = `${ ROOT_PATH }/src`;
 export const CONFIG = {
   target: 'web',
 
-  entry: `${ APP_PATH }/main`,
+  // entry: `${ APP_PATH }/main`,
 
   module: {
     rules: [
