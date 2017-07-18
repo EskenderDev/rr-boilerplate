@@ -1,5 +1,6 @@
 import { CONFIG, APP_PATH } from './config';
 import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
+import { resolve } from 'path';
 import merge from 'webpack-merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
@@ -11,8 +12,12 @@ export default merge({
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:9999',
     'webpack/hot/only-dev-server',
-    `${ APP_PATH }/main`,
+    resolve(APP_PATH, 'hot-reload'),
   ],
+
+  output: {
+    publicPath: '/',
+  },
 
   module: {
     rules: [{
@@ -33,6 +38,9 @@ export default merge({
   },
 
   plugins: [
+    new HotModuleReplacementPlugin(),
+    new NamedModulesPlugin(),
+
     new HtmlWebpackPlugin({
       inject: true,
       template: `${ APP_PATH }/template.html`,
@@ -44,9 +52,6 @@ export default merge({
       context: APP_PATH,
       files: '**/*.css'
     }),
-
-    new HotModuleReplacementPlugin(),
-    new NamedModulesPlugin(),
   ],
 
   performance: {
@@ -56,8 +61,9 @@ export default merge({
   devServer: {
     historyApiFallback: true,
     contentBase: APP_PATH,
+    publicPath: '/',
     openPage: '',
-    inline: false,
+    inline: true,
     noInfo: false,
     open: true,
     port: 9999,

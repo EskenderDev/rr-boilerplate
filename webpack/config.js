@@ -6,11 +6,9 @@ export const APP_PATH  = `${ ROOT_PATH }/src`;
 export const CONFIG = {
   target: 'web',
 
-  // entry: `${ APP_PATH }/main`,
-
   module: {
     rules: [
-      { test: /\.jsx?$/, loader: 'eslint-loader', enforce: 'pre', exclude: /node_modules/ },
+      // { test: /\.jsx?$/, loader: 'eslint-loader', enforce: 'pre', exclude: /node_modules/ },
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },

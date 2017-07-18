@@ -19,6 +19,9 @@ const initialState = [{
 }, {
   name: 'CSS-Modules',
   href: 'https://github.com/css-modules/css-modules',
+}, {
+  name: 'HMR',
+  href: 'https://webpack.js.org/concepts/hot-module-replacement',
 }];
 
 
